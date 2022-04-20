@@ -6,6 +6,8 @@
 #include "Sprite.h"
 #include "imguiMgr.h"
 #include "Player.h"
+#include "fbxsdk.h"
+#include "FbxLoader.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -19,6 +21,11 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
     DX12B::Get()->Initialize(WinApp);
 
     myImgui::InitializeImGui(DX12B::Get()->GetDevice(), WinAPI::GetHWND());
+
+    FbxLoader::GetInstance()->Initialize(DX12B::Get()->GetDevice());
+
+    // モデル名を指定してファイル読み込み
+    FbxLoader::GetInstance()->LoadModelFromFile("cube");
 
     //オブジェクト管理
     Object3DManager::Get()->CreateObject3DManager(DX12B::Get()->GetDevice(), WinApp->window_width, WinApp->window_height);
@@ -46,6 +53,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
 
     //プレイヤー
     Player player;
+
+    FbxManager *fbxManager = FbxManager::Create();
 
     //ゲームループ
     while (true)
@@ -75,7 +84,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
         player.Draw();
 
         // 前景描画
-        SpriteManager::Get()->SetCommonBeginDraw();
+        //SpriteManager::Get()->SetCommonBeginDraw();
 
         // 描画終了
         DX12B::Get()->EndDraw();
@@ -90,6 +99,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
     myImgui::FinalizeImGui();
 
     WinApp->DeleteGameWindow();
+
+    FbxLoader::GetInstance()->Finalize();
 
     delete WinApp;
     WinApp = nullptr;

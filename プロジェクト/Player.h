@@ -16,6 +16,12 @@ public:
 	Vector3 forwardVec; //進行方向
 	Vector3 playerRot;	 //プレイヤーの回転角
 	Object3d *object; //プレイヤーのオブジェクト
+
+	int flag = 0;
+	Vector3 vx;
+	Vector3 ax;
+	Vector3 gx;
+	Vector3 ss;
 private:
 	Model3D model; //プレイヤーのモデル
 };
