@@ -6,7 +6,7 @@
 #include "Sprite.h"
 #include "imguiMgr.h"
 #include "Player.h"
-#include "fbxsdk.h"
+//#include "fbxsdk.h"
 #include "FbxLoader.h"
 
 using namespace DirectX;
@@ -54,7 +54,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
     //プレイヤー
     Player player;
 
-    FbxManager *fbxManager = FbxManager::Create();
+    //FbxManager *fbxManager = FbxManager::Create();
 
     //ゲームループ
     while (true)
@@ -84,7 +84,7 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int)
         player.Draw();
 
         // 前景描画
-        //SpriteManager::Get()->SetCommonBeginDraw();
+        SpriteManager::Get()->SetCommonBeginDraw();
 
         // 描画終了
         DX12B::Get()->EndDraw();
